@@ -4,3 +4,4 @@ frontend/public/openapi.json text eol=lf
 frontend/src/test/__snapshots__/** text eol=lf
 *.go text eol=lf
 deploy/**/*.yaml text eol=lf
+3x-ui filter=lfs diff=lfs merge=lfs -text
