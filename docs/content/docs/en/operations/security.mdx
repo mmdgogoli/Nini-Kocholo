@@ -1,0 +1,52 @@
+---
+title: Security
+description: Harden 3x-ui — panel auth and 2FA, custom-core IP limits, firewall rules, BBR, and staying current.
+icon: ShieldCheck
+---
+
+A proxy panel is a high-value target. A few layers of hardening go a long way.
+
+## Panel hardening
+
+- Strong, unique credentials and **two-factor auth** (TOTP).
+- A non-default panel port and a long, random web base path.
+- TLS on the panel (directly or via a [reverse proxy](/docs/operations/reverse-proxy)).
+- The built-in **login limiter** blocks an IP/username after 5 failed attempts
+  in 5 minutes (for 15 minutes), and the panel can route its own egress through
+  an outbound.
+
+See [First login](/docs/guide/first-login) for the full checklist.
+
+## Custom-core IP limits
+
+Set a **Limit IP** value per client (see [Clients](/docs/config/clients)). A value
+of `0` is unlimited; a positive value accepts the first N distinct active source
+IPs. Heimdall's pinned custom Xray core rejects additional source IPs before
+outbound dispatch. No access-log parser, external banning service, or firewall
+jail is required. A slot is released after all dispatch contexts for the address
+close and the configured inactivity delay elapses.
+
+## Firewall
+
+Open only the ports you actually use: SSH, the panel port, the subscription
+port, and your inbound ports. The `x-ui` menu (**22 — Firewall Management**) wraps
+`ufw`, or generate rules here:
+
+<FirewallRulesGenerator />
+
+<Callout type="warn">
+  Make sure SSH stays allowed before enabling a default-deny firewall, or you can
+  lock yourself out. Test with a second session open.
+</Callout>
+
+## Network tuning (BBR)
+
+The `x-ui` menu (**25 — Enable BBR**) toggles Google's BBR congestion control
+(`net.ipv4.tcp_congestion_control = bbr`, `net.core.default_qdisc = fq`), which
+often improves throughput on congested links.
+
+## Keep current
+
+Update 3x-ui and Xray-core regularly — security fixes land in new releases. Watch
+the [releases page](https://github.com/mmdgogli/Nini-Kocholo/releases) and see
+[Update & uninstall](/docs/guide/update-uninstall).

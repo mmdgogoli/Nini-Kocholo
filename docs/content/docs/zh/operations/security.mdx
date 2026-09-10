@@ -1,0 +1,48 @@
+---
+title: 安全加固
+description: 加固 3x-ui——面板认证与 2FA、自定义核心 IP 限制、防火墙规则、BBR，以及保持更新。
+icon: ShieldCheck
+---
+
+代理面板是高价值目标。几层加固措施就能带来很大改善。
+
+## 面板加固
+
+- 强而唯一的凭据，并启用**双因素认证**（TOTP）。
+- 使用非默认的面板端口，以及一个长且随机的 Web 根路径。
+- 为面板启用 TLS（直接启用，或通过[反向代理](/docs/operations/reverse-proxy)）。
+- 内置的**登录限制器**会在某个 IP/用户名于 5 分钟内连续 5 次登录失败后将其封锁
+  （封锁 15 分钟），并且面板可以将自身的出站流量经由某个 outbound 路由出去。
+
+完整的检查清单请参见[首次登录](/docs/guide/first-login)。
+
+## 自定义核心 IP 限制
+
+为每个客户端设置 **Limit IP**（参见[客户端](/docs/config/clients)）。`0` 表示不限制；
+正数表示接受最先出现的 N 个不同活动源 IP。Heimdall 固定使用的自定义 Xray 核心会在
+流量进入 outbound 之前拒绝额外源 IP。该机制不需要访问日志解析器、外部封禁服务或
+防火墙 jail。当某个地址的全部 dispatch 上下文关闭并超过配置的空闲延迟后，其名额会被释放。
+
+## 防火墙
+
+只开放你实际使用的端口：SSH、面板端口、订阅端口以及你的入站端口。`x-ui` 菜单
+（**22 — Firewall Management**）封装了 `ufw`，或者你也可以在此生成规则：
+
+<FirewallRulesGenerator />
+
+<Callout type="warn">
+  在启用默认拒绝（default-deny）的防火墙之前，请确保 SSH 始终处于放行状态，否则你
+  可能把自己锁在外面。请在保留第二个会话的情况下进行测试。
+</Callout>
+
+## 网络调优（BBR）
+
+`x-ui` 菜单（**25 — Enable BBR**）用于切换 Google 的 BBR 拥塞控制算法
+（`net.ipv4.tcp_congestion_control = bbr`、`net.core.default_qdisc = fq`），它在拥塞链路
+上通常能提升吞吐量。
+
+## 保持更新
+
+定期更新 3x-ui 和 Xray-core——安全修复会随新版本发布。请关注
+[发布页面](https://github.com/mmdgogli/Nini-Kocholo/releases)，并参见
+[更新与卸载](/docs/guide/update-uninstall)。

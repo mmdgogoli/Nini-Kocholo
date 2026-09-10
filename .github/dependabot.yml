@@ -1,0 +1,29 @@
+# Heimdall keeps one permanent public branch: main.
+# Automated dependency pull requests are intentionally frozen and reviewed
+# manually between planned releases. Dependabot alerts remain available.
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "yearly"
+    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"
+
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "yearly"
+    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"
+
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "yearly"
+    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"

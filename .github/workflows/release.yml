@@ -1,0 +1,32 @@
+name: Heimdall Release Policy Check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-release-policy:
+    name: Verify custom-core release policy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify stable release configuration
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          VERSION="$(tr -d '[:space:]' < internal/config/version)"
+
+          test "$VERSION" = "1.5.3"
+          test -x packaging/release/build-linux-amd64.sh
+          test -x packaging/docker/init.sh
+
+          echo "Stable release assets are built manually from audited source."
+          echo "The supported stable artifact is linux-amd64 only."
+          echo "The audited private custom core must be supplied explicitly."
+          echo "GitHub Actions does not build or publish stable assets."

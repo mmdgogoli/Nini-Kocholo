@@ -1,0 +1,49 @@
+# Ignore editor and IDE settings
+.idea/
+.vscode/
+.cursor/
+.claude/*
+.cache/
+.sync*
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
+*.tar.gz
+__pycache__/
+
+# Build and distribution directories
+backup/
+bin/
+x-ui/
+dist/
+build/
+!internal/web/dist/
+internal/web/dist/*
+!internal/web/dist/.gitkeep
+release/
+node_modules/
+frontend/node_modules/
+
+# Compiled binaries and runtime data
+main
+*.exe
+x-ui.db
+x-ui.db-shm
+x-ui.db-wal
+system_metrics.gob
+*.dump
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Docker and environment overrides
+docker-compose.override.yml
+.env
+
+# Local third-party Windows installers must never be committed.
+/packaging/windows/vendor/
+!packaging/release/
+!packaging/release/build-linux-amd64.sh
