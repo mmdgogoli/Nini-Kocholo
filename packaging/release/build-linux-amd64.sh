@@ -79,7 +79,7 @@ file "$CUSTOM_XRAY" |
 grep -q 'statically linked' ||
     fail "input custom Xray binary is not statically linked"
 
-CUSTOM_XRAY_STRINGS="$BUILD_ROOT/custom-xray.strings"
+CUSTOM_XRAY_STRINGS="$(mktemp)"
 strings "$CUSTOM_XRAY" > "$CUSTOM_XRAY_STRINGS"
 
 for marker in \
@@ -95,7 +95,11 @@ do
         fail "custom Xray missing mandatory feature marker: $marker"
 done
 
-go version -m "$CUSTOM_XRAY" |
+rm -f "$CUSTOM_XRAY_STRINGS"
+
+CUSTOM_XRAY_MODULE_INFO="$(go version -m "$CUSTOM_XRAY" 2>&1)"
+
+printf '%s\n' "$CUSTOM_XRAY_MODULE_INFO" |
 grep -Fq 'github.com/juju/ratelimit' ||
     fail "custom Xray missing speed-limit dependency github.com/juju/ratelimit"
 
