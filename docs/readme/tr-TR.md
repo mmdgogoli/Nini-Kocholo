@@ -8,10 +8,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogli/Nini-Kocholo" alt="Release"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
-  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogli/Nini-Kocholo.svg" alt="GO Version"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogli/Nini-Kocholo/total.svg" alt="Downloads"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogoli/Nini-Kocholo" alt="Release"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogoli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
+  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogoli/Nini-Kocholo.svg" alt="GO Version"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogoli/Nini-Kocholo/total.svg" alt="Downloads"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true" alt="License"></a>
 </p>
 
@@ -67,24 +67,24 @@ Orijinal X-UI projesinin geliştirilmiş bir çatallaması (fork) olarak inşa e
 ## Hızlı Başlangıç
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh)
 ```
 
 Belirli bir sürümü kurmak için, etiketini (ör. `vX.Y.Z`) ekleyin:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) vX.Y.Z
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) vX.Y.Z
 ```
 
 Sürekli güncellenen **dev** sürümünü (kararlı bir sürüm değil; `main` dalından her commit'te oluşturulan en son ön sürüm) kurmak için `dev-latest` değerini geçirin:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) dev-latest
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) dev-latest
 ```
 
 Kurulum sırasında rastgele bir kullanıcı adı, şifre ve erişim yolu oluşturulur. Kurulumdan sonra, hizmeti başlatabileceğiniz/durdurabileceğiniz, giriş bilgilerinizi görüntüleyebileceğiniz veya sıfırlayabileceğiniz, SSL sertifikalarını yönetebileceğiniz ve çok daha fazlasını yapabileceğiniz yönetim menüsünü açmak için terminalde `x-ui` komutunu çalıştırın.
 
-Tam dokümantasyon için lütfen [proje Wiki sayfasını](https://github.com/mmdgogli/Nini-Kocholo/wiki) ziyaret edin.
+Tam dokümantasyon için lütfen [proje Wiki sayfasını](https://github.com/mmdgogoli/Nini-Kocholo/wiki) ziyaret edin.
 
 ### Etkileşimsiz kurulum
 
@@ -199,4 +199,4 @@ Katkılarınızı her zaman bekliyoruz. Bir sorun (issue) açmadan veya pull req
 
 ## Yıldız Tablosu
 
-[![Zaman içerisindeki yıldız sayısı](https://starchart.cc/mmdgogli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogli/Nini-Kocholo)
+[![Zaman içerisindeki yıldız sayısı](https://starchart.cc/mmdgogoli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogoli/Nini-Kocholo)

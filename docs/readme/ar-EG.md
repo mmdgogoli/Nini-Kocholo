@@ -8,10 +8,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogli/Nini-Kocholo" alt="Release"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
-  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogli/Nini-Kocholo.svg" alt="GO Version"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogli/Nini-Kocholo/total.svg" alt="Downloads"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogoli/Nini-Kocholo" alt="Release"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogoli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
+  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogoli/Nini-Kocholo.svg" alt="GO Version"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogoli/Nini-Kocholo/total.svg" alt="Downloads"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true" alt="License"></a>
 </p>
 
@@ -67,24 +67,24 @@
 ## البدء السريع
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh)
 ```
 
 لتثبيت إصدار محدد، أضِف وسمه (مثل `vX.Y.Z`):
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) vX.Y.Z
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) vX.Y.Z
 ```
 
 لتثبيت بنية **dev** المتجددة (أحدث إصدار أولي لكل التزام (commit) من `main`، وليس إصدارًا مستقرًا)، مرّر `dev-latest`:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) dev-latest
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) dev-latest
 ```
 
 أثناء التثبيت، يتم إنشاء اسم مستخدم وكلمة مرور ومسار وصول عشوائية. بعد التثبيت، شغّل `x-ui` لفتح قائمة الإدارة، حيث يمكنك بدء/إيقاف الخدمة، وعرض أو إعادة تعيين بيانات تسجيل الدخول، وإدارة شهادات SSL، والمزيد.
 
-للحصول على الوثائق الكاملة، يرجى زيارة [ويكي المشروع](https://github.com/mmdgogli/Nini-Kocholo/wiki).
+للحصول على الوثائق الكاملة، يرجى زيارة [ويكي المشروع](https://github.com/mmdgogoli/Nini-Kocholo/wiki).
 
 ### التثبيت غير التفاعلي
 
@@ -198,4 +198,4 @@ English · فارسی · العربية · 中文（简体） · 中文（繁體
 
 ## النجوم عبر الزمن
 
-[![Stargazers over time](https://starchart.cc/mmdgogli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogli/Nini-Kocholo)
+[![Stargazers over time](https://starchart.cc/mmdgogoli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogoli/Nini-Kocholo)

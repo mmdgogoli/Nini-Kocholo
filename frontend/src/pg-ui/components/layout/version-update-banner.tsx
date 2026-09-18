@@ -111,16 +111,20 @@ export function VersionUpdateBanner() {
     }, 300)
   }
 
-  const handleCopyCommand = async (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const copyUpdateCommand = async () => {
     await copy('pasarguard update')
     toast.success(t('usersTable.copied'))
   }
 
+  const handleCopyCommand = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    await copyUpdateCommand()
+  }
+
   if (!isOwnerAdmin || isLoading || !hasUpdate || !isVisible || !latestVersion || !normalizedVersion) return null
 
-  const releaseLink = releaseUrl || 'https://github.com/PasarGuard/panel/releases/latest'
+  const releaseLink = releaseUrl || 'https://github.com/mmdgogoli/Nini-Kocholo/releases/latest'
 
   return (
     <div
@@ -154,13 +158,14 @@ export function VersionUpdateBanner() {
             </p>
             <div className="mt-1.5 flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:gap-1.5">
               <span className="text-foreground/60 text-[11px] leading-relaxed break-words sm:text-xs sm:whitespace-nowrap">{t('version.updateCommandLabel')}</span>
-              <code
-                className="bg-muted/50 hover:bg-muted text-foreground/60 shrink-0 cursor-pointer rounded-sm px-1.5 py-0.5 font-mono text-[10px] break-all transition-colors sm:text-[11px] sm:break-normal"
+              <button
+                type="button"
+                className="bg-muted/50 hover:bg-muted text-foreground/60 shrink-0 cursor-pointer rounded-sm border-0 px-1.5 py-0.5 font-mono text-[10px] break-all transition-colors sm:text-[11px] sm:break-normal"
                 onClick={handleCopyCommand}
                 title={t('copy')}
               >
                 pasarguard update
-              </code>
+              </button>
             </div>
           </div>
         </div>

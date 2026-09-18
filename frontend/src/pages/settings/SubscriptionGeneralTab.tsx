@@ -229,7 +229,7 @@ export default function SubscriptionGeneralTab({ allSetting, updateSetting }: Su
                 <>
                   {t('pages.settings.subThemeDirDesc')}{' '}
                   <a
-                    href="https://github.com/mmdgogli/Nini-Kocholo/blob/main/docs/custom-subscription-templates.md"
+                    href="https://github.com/mmdgogoli/Nini-Kocholo/blob/main/docs/custom-subscription-templates.md"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

@@ -18,7 +18,7 @@ export function VersionBadge({ currentVersion, className }: VersionBadgeProps) {
     return null
   }
 
-  const releaseLink = releaseUrl || 'https://github.com/PasarGuard/panel/releases/latest'
+  const releaseLink = releaseUrl || 'https://github.com/mmdgogoli/Nini-Kocholo/releases/latest'
   const showText = isMobile || state === 'expanded'
   const showBadge = state === 'collapsed' && !isMobile
 

@@ -18,8 +18,8 @@ interface UseVersionCheckOptions {
   enabled?: boolean
 }
 
-const GITHUB_API_URL = 'https://api.github.com/repos/PasarGuard/panel/releases/latest'
-const CACHE_KEY = 'pg_release'
+const GITHUB_API_URL = 'https://api.github.com/repos/mmdgogoli/Nini-Kocholo/releases/latest'
+const CACHE_KEY = 'nini_kocholo_release_v1'
 const CACHE_DURATION = 10 * 60 * 1000
 
 function compareVersions(current: string, latest: string): number {

@@ -8,10 +8,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogli/Nini-Kocholo" alt="Release"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
-  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogli/Nini-Kocholo.svg" alt="GO Version"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogli/Nini-Kocholo/total.svg" alt="Downloads"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogoli/Nini-Kocholo" alt="Release"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogoli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
+  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogoli/Nini-Kocholo.svg" alt="GO Version"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogoli/Nini-Kocholo/total.svg" alt="Downloads"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true" alt="License"></a>
 </p>
 
@@ -67,24 +67,24 @@
 ## شروع سریع
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh)
 ```
 
 برای نصب یک نسخه‌ی مشخص، تگ آن را در انتها اضافه کنید (مثلاً `vX.Y.Z`):
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) vX.Y.Z
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) vX.Y.Z
 ```
 
 برای نصب نسخه‌ی غلتانِ **dev** (آخرین پیش‌انتشار به‌ازای هر کامیت از شاخه‌ی `main`، نه یک انتشار پایدار)، مقدار `dev-latest` را پاس دهید:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) dev-latest
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) dev-latest
 ```
 
 در حین نصب، یک نام کاربری، رمز عبور و مسیر دسترسی تصادفی تولید می‌شود. پس از نصب، دستور `x-ui` را اجرا کنید تا منوی مدیریت باز شود؛ در آنجا می‌توانید سرویس را شروع/متوقف کنید، اطلاعات ورود خود را ببینید یا بازنشانی کنید، گواهی‌های SSL را مدیریت کنید و کارهای دیگری انجام دهید.
 
-برای مستندات کامل، لطفاً به [ویکی پروژه](https://github.com/mmdgogli/Nini-Kocholo/wiki) مراجعه کنید.
+برای مستندات کامل، لطفاً به [ویکی پروژه](https://github.com/mmdgogoli/Nini-Kocholo/wiki) مراجعه کنید.
 
 ### نصب بدون نظارت
 
@@ -199,4 +199,4 @@ English · فارسی · العربية · 中文（简体） · 中文（繁體
 
 ## ستاره‌ها در طول زمان
 
-[![Stargazers over time](https://starchart.cc/mmdgogli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogli/Nini-Kocholo)
+[![Stargazers over time](https://starchart.cc/mmdgogoli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogoli/Nini-Kocholo)

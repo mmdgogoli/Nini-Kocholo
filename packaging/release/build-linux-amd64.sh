@@ -43,6 +43,9 @@ done
 test "$VERSION" = "1.5.5" ||
     fail "release version must be 1.5.5, got: $VERSION"
 
+printf '\n===== VERIFY PANEL REPOSITORY ROUTING =====\n'
+"$REPO_ROOT/tools/verify-panel-repo-links.sh"
+
 test -n "$CUSTOM_XRAY" ||
     fail "HEIMDALL_CUSTOM_XRAY is required"
 
@@ -135,6 +138,28 @@ printf '\n===== BUILD FRONTEND =====\n'
 test -f "$BUILD_SRC/internal/web/dist/index.html" ||
     fail "frontend build did not create embedded dist"
 
+printf '\n===== VERIFY BUILT FRONTEND REPOSITORY ROUTING =====\n'
+
+OLD_FRONTEND_REPO_1='HeimdallStudio/Heimdall''-Panel'
+OLD_FRONTEND_REPO_2='PasarGuard/''panel'
+OLD_FRONTEND_REPO_3='mmdgogli/''Nini-Kocholo'
+
+FORBIDDEN_FRONTEND_REPOS="${OLD_FRONTEND_REPO_1}|${OLD_FRONTEND_REPO_2}|${OLD_FRONTEND_REPO_3}"
+
+BAD_FRONTEND_FILES="$(
+    grep -RIlE         --binary-files=without-match         "$FORBIDDEN_FRONTEND_REPOS"         "$BUILD_SRC/internal/web/dist"         2>/dev/null || true
+)"
+
+if test -n "$BAD_FRONTEND_FILES"; then
+    printf '%s\n' "$BAD_FRONTEND_FILES" | head -20
+    fail "built frontend contains forbidden panel repository references"
+fi
+
+grep -RIlF     'mmdgogoli/Nini-Kocholo'     "$BUILD_SRC/internal/web/dist"     2>/dev/null |
+grep -q . ||
+    fail "built frontend does not contain canonical Nini-Kocholo repository"
+
+printf 'FRONTEND_REPOSITORY_ROUTING=pass\n'
 printf 'FRONTEND_BUILD=pass\n'
 
 printf '\n===== BUILD VALIDATED STRIPPED RELEASE PANEL =====\n'

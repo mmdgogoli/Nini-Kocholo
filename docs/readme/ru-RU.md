@@ -8,10 +8,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogli/Nini-Kocholo" alt="Release"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
-  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogli/Nini-Kocholo.svg" alt="GO Version"></a>
-  <a href="https://github.com/mmdgogli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogli/Nini-Kocholo/total.svg" alt="Downloads"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases"><img src="https://img.shields.io/github/v/release/mmdgogoli/Nini-Kocholo" alt="Release"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/actions"><img src="https://img.shields.io/github/actions/workflow/status/mmdgogoli/Nini-Kocholo/release.yml.svg" alt="Build"></a>
+  <a href="#"><img src="https://img.shields.io/github/go-mod/go-version/mmdgogoli/Nini-Kocholo.svg" alt="GO Version"></a>
+  <a href="https://github.com/mmdgogoli/Nini-Kocholo/releases/latest"><img src="https://img.shields.io/github/downloads/mmdgogoli/Nini-Kocholo/total.svg" alt="Downloads"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true" alt="License"></a>
 </p>
 
@@ -67,24 +67,24 @@
 ## Быстрый старт
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh)
 ```
 
 Чтобы установить конкретную версию, добавьте её тег (например, `vX.Y.Z`):
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) vX.Y.Z
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) vX.Y.Z
 ```
 
 Чтобы установить скользящую **dev**-сборку (новейший предварительный релиз по каждому коммиту из ветки `main`, а не стабильный релиз), передайте `dev-latest`:
 
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh) dev-latest
+bash <(curl -Ls https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh) dev-latest
 ```
 
 Во время установки генерируются случайные имя пользователя, пароль и путь доступа. После установки выполните `x-ui`, чтобы открыть меню управления, где можно запускать/останавливать сервис, просматривать или сбрасывать учётные данные для входа, управлять SSL-сертификатами и многое другое.
 
-Полную документацию смотрите в [вики проекта](https://github.com/mmdgogli/Nini-Kocholo/wiki).
+Полную документацию смотрите в [вики проекта](https://github.com/mmdgogoli/Nini-Kocholo/wiki).
 
 ### Автоматическая установка
 
@@ -199,4 +199,4 @@ English · فارسی · العربية · 中文（简体） · 中文（繁體
 
 ## Звезды с течением времени
 
-[![Stargazers over time](https://starchart.cc/mmdgogli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogli/Nini-Kocholo)
+[![Stargazers over time](https://starchart.cc/mmdgogoli/Nini-Kocholo.svg?variant=adaptive)](https://starchart.cc/mmdgogoli/Nini-Kocholo)

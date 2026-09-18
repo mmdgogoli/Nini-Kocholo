@@ -45,8 +45,8 @@ import './AppSidebar.css';
 
 const SIDEBAR_COLLAPSED_KEY = 'isSidebarCollapsed';
 const DONATE_URL = 'https://reymit.ir/heimdall';
-const DOCS_URL = 'https://github.com/mmdgogli/Nini-Kocholo#readme';
-const REPO_URL = 'https://github.com/mmdgogli/Nini-Kocholo';
+const DOCS_URL = 'https://github.com/mmdgogoli/Nini-Kocholo#readme';
+const REPO_URL = 'https://github.com/mmdgogoli/Nini-Kocholo';
 const LOGOUT_KEY = '__logout__';
 
 ensurePgAdminI18n();

@@ -10,7 +10,7 @@ export interface InstallOptions {
   webBasePath: string;
 }
 
-const REPO_RAW = 'https://raw.githubusercontent.com/mmdgogli/Nini-Kocholo/main/install.sh';
+const REPO_RAW = 'https://raw.githubusercontent.com/mmdgogoli/Nini-Kocholo/main/install.sh';
 const IMAGE = 'ghcr.io/sh7cbac/heimdall:latest';
 
 function isLatest(version: string): boolean {
