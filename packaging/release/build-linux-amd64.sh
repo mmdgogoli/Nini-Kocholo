@@ -34,7 +34,7 @@ need() {
 }
 
 for tool in \
-    git npm node go tar gzip sha256sum file \
+    git npm node go tar gzip sha256sum file strings \
     install find grep sed awk sort date
 do
     need "$tool"
@@ -62,6 +62,48 @@ ACTUAL_CUSTOM_XRAY_SHA256="$(
 
 test "$ACTUAL_CUSTOM_XRAY_SHA256" = "$EXPECTED_CUSTOM_XRAY_SHA256" ||
     fail "custom Xray SHA256 mismatch"
+
+printf '\n===== VERIFY HEIMDALL CUSTOM XRAY FEATURES =====\n'
+
+CUSTOM_XRAY_VERSION="$("$CUSTOM_XRAY" version 2>&1 || true)"
+
+printf '%s\n' "$CUSTOM_XRAY_VERSION" |
+grep -Fq 'Xray 26.6.22' ||
+    fail "custom Xray is not based on Xray 26.6.22"
+
+printf '%s\n' "$CUSTOM_XRAY_VERSION" |
+grep -Fq 'Custom' ||
+    fail "custom Xray does not identify itself as Custom"
+
+file "$CUSTOM_XRAY" |
+grep -q 'statically linked' ||
+    fail "input custom Xray binary is not statically linked"
+
+CUSTOM_XRAY_STRINGS="$BUILD_ROOT/custom-xray.strings"
+strings "$CUSTOM_XRAY" > "$CUSTOM_XRAY_STRINGS"
+
+for marker in \
+    '/usr/local/x-ui/bin/client-ip-limits.json' \
+    'ReleaseSeconds' \
+    '/usr/local/x-ui/bin/client-speed-limits.json' \
+    'uploadMbps' \
+    'downloadMbps' \
+    '/usr/local/x-ui/bin/client-activity-monitoring.json' \
+    '/run/secx/client-activity.sock'
+do
+    grep -Fq "$marker" "$CUSTOM_XRAY_STRINGS" ||
+        fail "custom Xray missing mandatory feature marker: $marker"
+done
+
+go version -m "$CUSTOM_XRAY" |
+grep -Fq 'github.com/juju/ratelimit' ||
+    fail "custom Xray missing speed-limit dependency github.com/juju/ratelimit"
+
+printf 'CUSTOM_XRAY_VERSION=26.6.22\n'
+printf 'CUSTOM_XRAY_CLIENT_ACTIVITY=pass\n'
+printf 'CUSTOM_XRAY_IP_LIMIT=pass\n'
+printf 'CUSTOM_XRAY_SPEED_LIMIT=pass\n'
+printf 'CUSTOM_XRAY_STATIC=pass\n'
 
 test -n "$EXPECTED_PANEL_SHA256" ||
     fail "HEIMDALL_EXPECTED_PANEL_SHA256 is required"
