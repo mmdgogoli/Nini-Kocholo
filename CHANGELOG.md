@@ -4,6 +4,15 @@ Notable Heimdall changes are documented here.
 
 ## Unreleased
 
+## 1.5.5
+
+### Fixed
+
+- Reduced the default strict per-client IP-limit release grace period from 60 seconds to 5 seconds, allowing a newly available IP slot to be reused shortly after the previous client disconnects while preserving strict concurrent-IP enforcement.
+- Updated stable linux-amd64 release policy metadata for the v1.5.5 release.
+- Corrected canonical Nini-Kocholo GitHub repository URLs used by the installer, updater, CLI, and panel updater.
+
+
 ### Changed
 
 - Removed the vendored Windows OpenSSL installer from source and release archives; Windows users obtain third-party OpenSSL separately when needed.

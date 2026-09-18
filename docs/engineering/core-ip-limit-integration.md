@@ -25,7 +25,7 @@ Writes are atomic and skipped when content has not changed.
 
 ```text
 XRAY_CLIENT_IP_LIMITS_FILE=/usr/local/x-ui/bin/client-ip-limits.json
-XUI_IP_LIMIT_RELEASE_SECONDS=60
+XUI_IP_LIMIT_RELEASE_SECONDS=5
 ```
 
 Both variables are optional. The release delay accepts values from 1 to 86400

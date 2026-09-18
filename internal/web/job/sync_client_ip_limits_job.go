@@ -22,7 +22,7 @@ const (
 	clientIPLimitsFileName             = "client-ip-limits.json"
 	clientIPLimitsPathEnv              = "XRAY_CLIENT_IP_LIMITS_FILE"
 	clientIPLimitReleaseSecondsEnv     = "XUI_IP_LIMIT_RELEASE_SECONDS"
-	defaultClientIPLimitReleaseSeconds = 60
+	defaultClientIPLimitReleaseSeconds = 5
 	maxClientIPLimitReleaseSeconds     = 24 * 60 * 60
 )
 
