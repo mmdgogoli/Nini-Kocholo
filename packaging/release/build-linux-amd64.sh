@@ -40,8 +40,8 @@ do
     need "$tool"
 done
 
-test "$VERSION" = "1.5.5" ||
-    fail "release version must be 1.5.5, got: $VERSION"
+test "$VERSION" = "1.5.6" ||
+    fail "release version must be 1.5.6, got: $VERSION"
 
 printf '\n===== VERIFY PANEL REPOSITORY ROUTING =====\n'
 "$REPO_ROOT/tools/verify-panel-repo-links.sh"

@@ -452,12 +452,14 @@ func (s *ClientService) addInboundClient(inboundSvc *InboundService, data *model
 	}
 
 	oldClients, _ := oldSettings["clients"].([]any)
+	oldClientCount := len(oldClients)
 	oldClients = compactOrphans(database.GetDB(), oldClients)
+	requiresFullSync := len(oldClients) != oldClientCount
 	oldClients = append(oldClients, interfaceClients...)
 
 	oldSettings["clients"] = oldClients
 
-	newSettings, err := json.MarshalIndent(oldSettings, "", "  ")
+	newSettings, err := json.Marshal(oldSettings)
 	if err != nil {
 		return false, err
 	}
@@ -486,21 +488,41 @@ func (s *ClientService) addInboundClient(inboundSvc *InboundService, data *model
 		if e := tx.Save(oldInbound).Error; e != nil {
 			return e
 		}
-		finalClients, gcErr := inboundSvc.GetClients(oldInbound)
-		if gcErr != nil {
-			return gcErr
+
+		useDelta := !requiresFullSync
+		if useDelta {
+			var consistencyErr error
+			useDelta, consistencyErr = s.inboundLinksMatchClients(tx, oldInbound.Id, existingClients)
+			if consistencyErr != nil {
+				return consistencyErr
+			}
 		}
-		if err := s.SyncInbound(tx, oldInbound.Id, finalClients); err != nil {
-			return err
-		}
-		// The canonical link now exists, so refresh its runtime-stat mapping in
-		// this same transaction. Running this after commit caused one additional
-		// autocommit write for every target inbound.
-		if err := inboundSvc.syncClientInboundTrafficMappingsForInbound(
-			tx,
-			oldInbound.Id,
-		); err != nil {
-			return err
+
+		if useDelta {
+			if err := s.addInboundClientsDelta(tx, oldInbound.Id, clients); err != nil {
+				return err
+			}
+			for i := range clients {
+				if err := inboundSvc.upsertClientInboundTrafficMapping(tx, oldInbound.Id, &clients[i]); err != nil {
+					return err
+				}
+			}
+		} else {
+			// Legacy, missing, extra, or flow-inconsistent normalized links retain
+			// the full reconciliation and mapping-repair behavior.
+			finalClients, gcErr := inboundSvc.GetClients(oldInbound)
+			if gcErr != nil {
+				return gcErr
+			}
+			if err := s.SyncInbound(tx, oldInbound.Id, finalClients); err != nil {
+				return err
+			}
+			if err := inboundSvc.syncClientInboundTrafficMappingsForInbound(
+				tx,
+				oldInbound.Id,
+			); err != nil {
+				return err
+			}
 		}
 		if oldInbound.NodeID != nil {
 			return (&NodeService{}).MarkNodeDirtyTx(tx, *oldInbound.NodeID)
