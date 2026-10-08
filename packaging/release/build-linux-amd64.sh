@@ -40,7 +40,7 @@ do
     need "$tool"
 done
 
-test "$VERSION" = "1.5.5" ||
+test "$VERSION" = "1.5.6" ||
     fail "release version must be 1.5.5, got: $VERSION"
 
 printf '\n===== VERIFY PANEL REPOSITORY ROUTING =====\n'

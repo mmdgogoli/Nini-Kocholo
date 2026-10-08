@@ -18,6 +18,89 @@ func (s *ClientService) SyncInbound(tx *gorm.DB, inboundId int, clients []model.
 		return err
 	}
 
+	idByEmail, err := s.upsertClientRecords(tx, clients)
+	if err != nil {
+		return err
+	}
+
+	links := clientInboundLinks(inboundId, clients, idByEmail)
+	if len(links) > 0 {
+		if err := tx.CreateInBatches(links, 200).Error; err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// addInboundClientsDelta persists only newly attached clients and their links.
+// Callers must first verify that the inbound's existing normalized links match
+// its settings JSON; SyncInbound remains the repair/reconciliation fallback.
+func (s *ClientService) addInboundClientsDelta(tx *gorm.DB, inboundId int, clients []model.Client) error {
+	if tx == nil {
+		tx = database.GetDB()
+	}
+
+	idByEmail, err := s.upsertClientRecords(tx, clients)
+	if err != nil {
+		return err
+	}
+
+	links := clientInboundLinks(inboundId, clients, idByEmail)
+	if len(links) == 0 {
+		return nil
+	}
+	return tx.CreateInBatches(links, 200).Error
+}
+
+// inboundLinksMatchClients is the cheap safety check for the add fast path.
+// One indexed join verifies that every existing JSON client has exactly the
+// expected link and per-inbound flow, with no extra normalized links.
+func (s *ClientService) inboundLinksMatchClients(tx *gorm.DB, inboundId int, clients []model.Client) (bool, error) {
+	if tx == nil {
+		tx = database.GetDB()
+	}
+
+	expected := make(map[string]string, len(clients))
+	for i := range clients {
+		email := strings.TrimSpace(clients[i].Email)
+		if email == "" {
+			continue
+		}
+		if _, exists := expected[email]; !exists {
+			expected[email] = clients[i].Flow
+		}
+	}
+
+	var rows []struct {
+		Email        string `gorm:"column:email"`
+		FlowOverride string `gorm:"column:flow_override"`
+	}
+	if err := tx.Table("client_inbounds").
+		Select("clients.email AS email, client_inbounds.flow_override AS flow_override").
+		Joins("LEFT JOIN clients ON clients.id = client_inbounds.client_id").
+		Where("client_inbounds.inbound_id = ?", inboundId).
+		Scan(&rows).Error; err != nil {
+		return false, err
+	}
+
+	if len(rows) != len(expected) {
+		return false, nil
+	}
+	seen := make(map[string]struct{}, len(rows))
+	for i := range rows {
+		flow, ok := expected[rows[i].Email]
+		if !ok || flow != rows[i].FlowOverride {
+			return false, nil
+		}
+		if _, duplicate := seen[rows[i].Email]; duplicate {
+			return false, nil
+		}
+		seen[rows[i].Email] = struct{}{}
+	}
+	return len(seen) == len(expected), nil
+}
+
+func (s *ClientService) upsertClientRecords(tx *gorm.DB, clients []model.Client) (map[string]int, error) {
 	emails := make([]string, 0, len(clients))
 	seen := make(map[string]struct{}, len(clients))
 	for i := range clients {
@@ -38,7 +121,7 @@ func (s *ClientService) SyncInbound(tx *gorm.DB, inboundId int, clients []model.
 		end := min(start+selectChunk, len(emails))
 		var rows []model.ClientRecord
 		if err := tx.Where("email IN ?", emails[start:end]).Find(&rows).Error; err != nil {
-			return err
+			return nil, err
 		}
 		for i := range rows {
 			r := rows[i]
@@ -130,24 +213,28 @@ func (s *ClientService) SyncInbound(tx *gorm.DB, inboundId int, clients []model.
 			continue
 		}
 		if err := tx.Save(row).Error; err != nil {
-			return err
+			return nil, err
 		}
 		if err := tx.Model(&model.ClientRecord{}).
 			Where("id = ?", row.Id).
 			UpdateColumn("updated_at", preservedUpdatedAt).Error; err != nil {
-			return err
+			return nil, err
 		}
 	}
 
 	if len(toCreate) > 0 {
 		if err := tx.CreateInBatches(toCreate, 200).Error; err != nil {
-			return err
+			return nil, err
 		}
 		for _, rec := range toCreate {
 			idByEmail[rec.Email] = rec.Id
 		}
 	}
 
+	return idByEmail, nil
+}
+
+func clientInboundLinks(inboundId int, clients []model.Client, idByEmail map[string]int) []model.ClientInbound {
 	links := make([]model.ClientInbound, 0, len(clients))
 	linked := make(map[int]struct{}, len(clients))
 	for i := range clients {
@@ -169,12 +256,7 @@ func (s *ClientService) SyncInbound(tx *gorm.DB, inboundId int, clients []model.
 			FlowOverride: clients[i].Flow,
 		})
 	}
-	if len(links) > 0 {
-		if err := tx.CreateInBatches(links, 200).Error; err != nil {
-			return err
-		}
-	}
-	return nil
+	return links
 }
 
 func (s *ClientService) DetachInbound(tx *gorm.DB, inboundId int) error {
